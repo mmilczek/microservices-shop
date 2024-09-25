@@ -1,5 +1,6 @@
 package com.marcin.microservices.order.service;
 
+import com.marcin.microservices.order.client.InventoryClient;
 import com.marcin.microservices.order.dto.OrderRequest;
 import com.marcin.microservices.order.model.Order;
 import com.marcin.microservices.order.repository.OrderRepository;
@@ -12,13 +13,19 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
 
+    private final InventoryClient inventoryClient;
+
     private final OrderMapper orderMapper;
 
     public void placeOrder(OrderRequest orderRequest) {
 
-        Order order = orderMapper.toOrder(orderRequest);
+        var isProductInStock = inventoryClient.isInStock(orderRequest.skuCode(), orderRequest.quantity());
 
-        orderRepository.save(order);
-
+        if (isProductInStock) {
+            Order order = orderMapper.toOrder(orderRequest);
+            orderRepository.save(order);
+        } else {
+            throw new RuntimeException("Product with skuCode " + orderRequest.skuCode() + " is not in stock");
+        }
     }
 }
