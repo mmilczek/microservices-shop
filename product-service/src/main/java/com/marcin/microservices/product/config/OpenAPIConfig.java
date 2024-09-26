@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class OpenApiConfig {
+public class OpenAPIConfig {
 
     @Bean
     public OpenAPI productServiceAPI() {
@@ -21,5 +21,4 @@ public class OpenApiConfig {
                         .description("You can refer to the Product Service Wiki Documentation")
                         .url("https://product-service-dummy-url.com/docs"));
     }
-
 }
