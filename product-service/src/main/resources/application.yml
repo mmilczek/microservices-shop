@@ -7,6 +7,8 @@ spring:
       port: 27017
       database: product-service
       authentication-database: admin
+  application:
+    name: product-service
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
