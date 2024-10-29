@@ -9,6 +9,22 @@ spring:
       authentication-database: admin
   application:
     name: product-service
+
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: health, info, metrics, prometheus
+    metrics:
+      distribution:
+        percentiles-histogram:
+          http:
+            server:
+              requests: true
+    observations:
+      key-values:
+        application: product-service
+
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
