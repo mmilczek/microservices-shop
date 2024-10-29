@@ -24,6 +24,9 @@ spring:
     observations:
       key-values:
         application: product-service
+    tracing:
+      sampling:
+        probability: 1.0
 
 springdoc:
   swagger-ui:
